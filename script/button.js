@@ -6,6 +6,11 @@ button.onclick = function() {
     document.getElementById("button").remove()
     document.body.innerHTML = `
                 <div class="pop-up" id=a>
+                    <style>
+                        body {
+                            background-color: black;
+                        }
+                    </style>
                     <div id="wrapper">
                         <div class="envelope open">
                             <div class="flap front"></div>
@@ -13,7 +18,7 @@ button.onclick = function() {
                             <div class="letter"></div>
                         </div>
                     </div>
-                    <h1 style="text-align:center ;color:brown;">From 12A4 NH with LOVE</h1>
+                    <h1 style="text-align:center ;color:white;">From 12A4 NH with LOVE</h1>
                 </div>
                 <div class="book" id="book">
                     <div class="book-first"></div>

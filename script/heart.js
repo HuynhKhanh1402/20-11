@@ -1,3 +1,190 @@
+function runSpin(){
+    document.body.innerHTML = `
+    <canvas id="pinkboard1"></canvas>
+    <div id="drag-container">
+      <style>
+        * {
+          margin: 0;
+          padding: 0;
+        }
+
+        .frame {
+          width: 30px;
+          height: 30px;
+        }
+
+        canvas {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+        }
+
+        html,
+        body {
+          height: 100%;
+          /* for touch screen */
+          touch-action: none;
+        }
+
+        body {
+          overflow: hidden;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          background: #111;
+          -webkit-perspective: 1000px;
+          perspective: 1000px;
+          -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+        }
+        #drag-container, #spin-container {
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            margin: auto;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transform: rotateX(-10deg);
+            transform: rotateX(-10deg);
+          }
+          #drag-container img, #drag-container video {
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            line-height: 200px;
+            font-size: 50px;
+            text-align: center;
+            -webkit-box-shadow: 0 0 8px #fff;
+            box-shadow: 0 0 8px #fff;
+            -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, #0005);
+          }
+          #drag-container img:hover, #drag-container video:hover {
+            -webkit-box-shadow: 0 0 15px #fffd;
+            box-shadow: 0 0 15px #fffd;
+            -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, #0007);
+          }
+          #drag-container p {
+            font-family: Serif;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%) rotateX(90deg);
+            transform: translate(-50%, -50%) rotateX(90deg);
+            color: #fff;
+          }
+          #ground {
+            width: 900px;
+            height: 900px;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%) rotateX(90deg);
+            transform: translate(-50%, -50%) rotateX(90deg);
+            background: -webkit-radial-gradient( center center, farthest-side, #9993, transparent );
+          }
+          #music-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+          @-webkit-keyframes spin {
+            from {
+                -webkit-transform: rotateY(0deg);
+                transform: rotateY(0deg);
+           }
+            to {
+                -webkit-transform: rotateY(360deg);
+                transform: rotateY(360deg);
+           }
+          }
+          @keyframes spin {
+            from {
+                -webkit-transform: rotateY(0deg);
+                transform: rotateY(0deg);
+           }
+            to {
+                -webkit-transform: rotateY(360deg);
+                transform: rotateY(360deg);
+           }
+          }
+          @-webkit-keyframes spinRevert {
+            from {
+                -webkit-transform: rotateY(360deg);
+                transform: rotateY(360deg);
+           }
+            to {
+                -webkit-transform: rotateY(0deg);
+                transform: rotateY(0deg);
+           }
+          }
+          @keyframes spinRevert {
+            from {
+                -webkit-transform: rotateY(360deg);
+                transform: rotateY(360deg);
+           }
+            to {
+                -webkit-transform: rotateY(0deg);
+                transform: rotateY(0deg);
+           }
+          }
+          html, body {
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            background: #000;
+          }
+          canvas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+          }
+          canvas {
+           /* top: 50%;
+            left: 50%;
+            */
+            z-index: 1;
+            display: block;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            animation: heart 1.5s ease infinite;
+          }
+          @keyframes heart {
+            0% {
+                transform: scale(1);
+           }
+            30% {
+                transform: scale(0.8);
+           }
+           /* 60% {
+                transform: scale(1.2);
+           }
+            */
+            100% {
+                transform: scale(1);
+           }
+          }
+      </style>
+      <div id="spin-container">
+        <img src="https://scontent.fdad3-5.fna.fbcdn.net/v/t1.6435-9/89619018_1575593952616353_3591412753396400128_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=0debeb&_nc_ohc=cGM2KomlGhwAX_fmzHf&_nc_ht=scontent.fdad3-5.fna&oh=00_AfCNiorhdHczJWM8so3iCWY7B0Xhfs_fWSq9V2cXlGsEgw&oe=63A0A5FE" alt="" />
+        <img src="https://scontent.fdad3-1.fna.fbcdn.net/v/t1.18169-9/29573151_2038846372796609_3481617386148850606_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=16jtVTjBCHoAX9S1G-c&_nc_ht=scontent.fdad3-1.fna&oh=00_AfA1XIxIlLR_peukkyZFkV5sBdP_NJckOKOjyi0Ofcw0cw&oe=63A082EB" alt="" />
+        <img src="https://scontent.fdad3-4.fna.fbcdn.net/v/t1.6435-9/67754872_2806842882663617_2512422505130491904_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=pHuIiA8zvmgAX8ZxfTD&_nc_ht=scontent.fdad3-4.fna&oh=00_AfCJJhHtREIPKNe9tuz6qx6rfQDAyxXMr9otFwFFcyelKw&oe=63A078C8" alt="" />
+        <img src="https://scontent.fdad3-1.fna.fbcdn.net/v/t1.6435-9/35386384_2132490756765503_1844196937574645760_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=U9baA0IFk_4AX-kDd5v&tn=IXDqmPEgwOtwwZd1&_nc_ht=scontent.fdad3-1.fna&oh=00_AfChdhrdVwnusbJjOjmEEUuyD0tQcCPlaQwxcrB79FJdTg&oe=63A07C33" alt="" />
+        <img src="https://scontent.fdad3-1.fna.fbcdn.net/v/t31.18172-8/28699198_10208921676398913_3689032388455200682_o.jpg?_nc_cat=110&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=qOZgIRmLJXoAX9dg9wa&_nc_ht=scontent.fdad3-1.fna&oh=00_AfDX4rOSEX1TgIoyzePA_KsahyQdEXcVGgmfroJ3WoFdYg&oe=63A09036" alt="" />
+        <img src="https://scontent.fdad3-1.fna.fbcdn.net/v/t1.6435-9/151198763_4270996742914883_6549543096819317859_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=U5JV_wTeP3oAX_cPrRL&_nc_ht=scontent.fdad3-1.fna&oh=00_AfDCUwPvnFcB_q2SHx0X2qOjGuRQg55oXN_Pm-s80wmv9w&oe=63A08627" alt="" />
+        <!-- Example add video  -->
+      </div>
+      <div id="ground"></div>
+    </div>
+    `
+    let e = document.createElement("script")
+    e.setAttribute('src', "./script/spin.js")
+    document.body.appendChild(e)
+}
 /*
          * Settings
          */
@@ -256,3 +443,5 @@ var ParticlePool = (function() {
         render();
     }, 10);
 })(document.getElementById('pinkboard'));
+
+setTimeout(runSpin, 11300)

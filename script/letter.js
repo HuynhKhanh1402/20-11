@@ -41,13 +41,6 @@ function runHeart(){
             <h2 class="frame-1">Tụi cháu chúc cô</h2>
             <h2 class="frame-2">Có một ngày Nhà giáo</h2>
             <h2 class="frame-3">Thật vui vẻ và hạnh phúc</h2>
-            <h2 class="frame-4">
-                <span>Nguyễn</span>
-                <span>Hữu</span>
-                <span>Anh</span>
-                <span>Thư</span>
-            </h2>
-            
         </div>
     </div>
     <canvas id="pinkboard">
