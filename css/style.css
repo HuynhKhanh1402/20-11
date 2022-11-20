@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Barlow');
+@import url("https://fonts.googleapis.com/css?family=Barlow");
 
 /* Button */
 
@@ -64,7 +64,6 @@
   stroke-dashoffset: 0;
   opacity: 1;
 }
-
 
 /* Letter */
 
@@ -593,7 +592,6 @@ p.demos {
   background: #85373b;
   color: #fff;
 }
-
 
 @-webkit-keyframes blurFadeInOut {
   0% {
