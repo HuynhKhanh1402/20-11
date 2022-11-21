@@ -444,4 +444,4 @@ var ParticlePool = (function() {
 	}, 10);
 })(document.getElementById('pinkboard'));
 
-setTimeout(runSpin, 10000)
+setTimeout(runSpin, 9000)
